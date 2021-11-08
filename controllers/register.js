@@ -19,7 +19,8 @@ const handleRegister = (req, res, db, bcrypt) => {
                     .returning('*')
                     .insert({
                         name: name,
-                        email: loginEmail[0]
+                        email: loginEmail[0],
+                        joined: new Date()
                     })
                     .then(user => {
                         res.json(user[0]);
@@ -30,7 +31,7 @@ const handleRegister = (req, res, db, bcrypt) => {
     })
         .catch(err => {
             console.log(err);
-            res.status(400).json(err)
+            res.status(400).json('Unable to register')
         });
 }
 
